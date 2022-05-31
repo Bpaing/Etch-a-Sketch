@@ -1,7 +1,6 @@
 function generateStyle(rows, cols) {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    console.log(height);
 
     let styles = `
     .container {
@@ -30,4 +29,10 @@ function generateGrid(rows, cols) {
     console.log(`${container.children.length} divs generated.`);
 }
 
+function changeColor() {
+    this.classList.add('hover');
+}
+
 generateGrid(16, 16);
+const squares = document.querySelectorAll('.square');
+squares.forEach(tile => tile.addEventListener('mouseover', changeColor));

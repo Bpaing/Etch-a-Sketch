@@ -4,6 +4,9 @@
 }
 
 .square {
+    border: 1px dotted black;
+}
+
+.hover {
     background-color: black;
-    border: 1px solid red;
 }
