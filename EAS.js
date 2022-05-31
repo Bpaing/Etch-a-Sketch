@@ -1,13 +1,14 @@
 function generateStyle(rows, cols) {
+    const headerHeight = document.querySelector('ul').height;
     const width = window.innerWidth;
-    const height = window.innerHeight;
+    const height = window.innerHeight - headerHeight;
 
     let styles = `
     .container {
         display:grid;
         grid-template-columns: repeat(auto-fill, minmax(${Math.floor(width/cols)}px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(${Math.floor(height/rows)}px, 1fr));
-        height: 100vh;
+        height: calc(100vh - 30px);
         width: 100vw;
     }
     `
