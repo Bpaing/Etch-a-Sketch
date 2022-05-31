@@ -34,6 +34,14 @@ function changeColor() {
     this.classList.add('hover');
 }
 
+function resetGrid() {
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(tile => tile.classList.remove('hover'));
+}
+
 generateGrid(16, 16);
 const squares = document.querySelectorAll('.square');
 squares.forEach(tile => tile.addEventListener('mouseover', changeColor));
+
+const buttons = document.querySelectorAll('button');
+buttons[1].addEventListener('click', resetGrid);
