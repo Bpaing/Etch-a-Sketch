@@ -14,7 +14,12 @@ function generateStyle(rows, cols) {
     `
     const styleSheet = document.createElement('style');
     styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
+    const style = document.querySelector('style');
+    if (style) {
+        document.head.replaceChild(style, styleSheet);
+    } else {
+        document.head.appendChild(styleSheet);
+    }
 }
 
 function generateGrid(rows, cols) {
@@ -34,14 +39,36 @@ function changeColor() {
     this.classList.add('hover');
 }
 
+function changeGrid() {
+    let num = parseInt(prompt("Please enter # of squares per side."));
+    if (isNaN(num)) { return; }
+    console.log("yes");
+    const container = document.querySelector('.container');
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    generateGrid(num, num);
+}
 function resetGrid() {
     const squares = document.querySelectorAll('.square');
     squares.forEach(tile => tile.classList.remove('hover'));
 }
 
-generateGrid(16, 16);
-const squares = document.querySelectorAll('.square');
-squares.forEach(tile => tile.addEventListener('mouseover', changeColor));
+function generateGrid(rows, cols) {
+    const container = document.querySelector('.container');
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const square = document.createElement('div');
+            square.className = "square";
+            square.addEventListener('mouseover', changeColor);
+            container.append(square);
+        }
+    }
+    generateStyle(rows, cols);
+    console.log(`${container.children.length} divs generated.`);
+}
 
+generateGrid(16, 16);
 const buttons = document.querySelectorAll('button');
+buttons[0].addEventListener('click', changeGrid)
 buttons[1].addEventListener('click', resetGrid);
